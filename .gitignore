@@ -1,0 +1,7 @@
+prewitt
+sobel
+harris
+gaussian
+
+*.o
+*.png
