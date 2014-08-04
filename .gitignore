@@ -1,7 +1,4 @@
-prewitt
-sobel
-harris
-gaussian
+bin/
 
 *.o
 *.png

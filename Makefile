@@ -1,21 +1,26 @@
-CXX = g++
-CXXFLAGS = -O3 --inline
+CXX := g++
+CXXFLAGS := -O3 --inline
 
-LIBPNG_CXXFLAGS = $(shell libpng-config --cppflags)
-LIBPNG_LDFLAGS  = $(shell libpng-config --ldflags)
+LIBPNG_CXXFLAGS := $(shell libpng-config --cppflags)
+LIBPNG_LDFLAGS  := $(shell libpng-config --ldflags)
+
+PREFIX := bin
+$(shell mkdir -p $(PREFIX))
+
+TARGETS = prewitt sobel gaussian harris
 
 .PHONY: all
 
-all: prewitt sobel gaussian harris
+all: $(addprefix $(PREFIX)/, $(TARGETS))
 
-prewitt: prewitt.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
+$(PREFIX)/prewitt: prewitt.cpp
+	$(CXX) $(CXXFLAGS) $< $(OUTPUT_OPTION) $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
 
-sobel: sobel.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
+$(PREFIX)/sobel: sobel.cpp
+	$(CXX) $(CXXFLAGS) $< $(OUTPUT_OPTION) $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
 
-gaussian: gaussian.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
+$(PREFIX)/gaussian: gaussian.cpp
+	$(CXX) $(CXXFLAGS) $< $(OUTPUT_OPTION) $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
 
-harris: harris.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
+$(PREFIX)/harris: harris.cpp
+	$(CXX) $(CXXFLAGS) $< $(OUTPUT_OPTION) $(LIBPNG_CXXFLAGS) $(LIBPNG_LDFLAGS)
