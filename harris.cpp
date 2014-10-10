@@ -5,15 +5,6 @@
 const double K = 0.06;
 const int THRESHOLD = 1000000;
 
-struct coordinate {
-  size_t x, y;
-
-  coordinate(size_t x_, size_t y_) {
-    x = x_;
-    y = y_;
-  }
-};
-
 int main(int argc, char** argv) {
   png::image<png::gray_pixel> img(argv[1]);
 
